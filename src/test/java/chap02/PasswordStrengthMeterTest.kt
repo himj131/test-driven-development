@@ -52,4 +52,9 @@ class PasswordStrengthMeterTest {
     internal fun meetsOnlyNumCriteria_Then_Weak() {
         assertStrength("12345", PasswordStrength.WEAK)
     }
+
+    @Test
+    internal fun meetsOnlyUpperCriteria_Then_Wedak() {
+        assertStrength("ABZED", PasswordStrength.WEAK)
+    }
 }
