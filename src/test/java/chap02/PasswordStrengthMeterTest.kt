@@ -9,6 +9,7 @@ class PasswordStrengthMeterTest {
     @Test
     internal fun meetsAllCriteria_Then_Strong() {
         assertStrength("ab12!@AB", PasswordStrength.STRONG)
+
     }
 
     @Test
@@ -20,6 +21,7 @@ class PasswordStrengthMeterTest {
     internal fun meetsOtherCriteria_Except_for_number_Then_Normal() {
         assertStrength("ab!ALBKDaa", PasswordStrength.NORMAL)
     }
+
 
     private fun assertStrength(password: String?, expStr: PasswordStrength) {
         val strength = meter.meter(password)
@@ -34,5 +36,10 @@ class PasswordStrengthMeterTest {
     @Test
     internal fun emptyInput_Then_Invalid() {
         assertStrength("", PasswordStrength.INVALID)
+    }
+
+    @Test
+    internal fun meetsOtherCriteria_except_for_UppperCase_Then_Normal() {
+        assertStrength("123asdf!!", PasswordStrength.NORMAL)
     }
 }
