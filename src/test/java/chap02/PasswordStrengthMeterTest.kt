@@ -42,4 +42,9 @@ class PasswordStrengthMeterTest {
     internal fun meetsOtherCriteria_except_for_UppperCase_Then_Normal() {
         assertStrength("123asdf!!", PasswordStrength.NORMAL)
     }
+
+    @Test
+    internal fun meetsOnlyLengthCriteria_Then_Weak() {
+        assertStrength("aaaaaaaaa", PasswordStrength.WEAK)
+    }
 }
