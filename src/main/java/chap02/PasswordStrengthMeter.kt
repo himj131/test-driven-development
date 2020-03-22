@@ -3,10 +3,7 @@ package chap02
 class PasswordStrengthMeter {
     fun meter(pwd: String?): PasswordStrength {
         if(pwd.isNullOrBlank()) return PasswordStrength.INVALID
-        var containsUpp = false;
-        for(p in pwd.toCharArray()) {
-            if(Character.isUpperCase(p)) containsUpp = true
-        }
+        var containsUpp = meetsContainingUppercaseCriteria(pwd)
         if(!containsUpp) return PasswordStrength.NORMAL
 
         if(pwd!!.length < 8) {
@@ -16,6 +13,14 @@ class PasswordStrengthMeter {
 
         if(!containsNum) return PasswordStrength.NORMAL
         return PasswordStrength.STRONG
+    }
+
+    private fun meetsContainingUppercaseCriteria (pwd: String): Boolean {
+        var containsUpp = false;
+        for (p in pwd.toCharArray()) {
+            if (Character.isUpperCase(p)) containsUpp = true
+        }
+        return containsUpp
     }
 
     private fun meetsContainingNumberCriteria(pwd: String): Boolean {
