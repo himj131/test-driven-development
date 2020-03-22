@@ -68,4 +68,7 @@ fabric.properties
 # Editor-based Rest Client
 .idea/httpRequests
 
+# target
+target/
+
 workspace.xml
