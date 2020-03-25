@@ -9,7 +9,6 @@ class PasswordStrengthMeterTest {
     @Test
     internal fun meetsAllCriteria_Then_Strong() {
         assertStrength("ab12!@AB", PasswordStrength.STRONG)
-
     }
 
     @Test
