@@ -5,13 +5,13 @@ import java.time.LocalDate
 class PayData {
     lateinit var billingDate: LocalDate
     var payAmount: Int = 0
+    var firstBillingDate: LocalDate? = null
 
-    constructor()
-
-    constructor(billingDate: LocalDate, payAmount: Int){
-        this.billingDate = billingDate
-        this.payAmount = payAmount
-    }
+//    constructor(billingDate: LocalDate, payAmount: Int, firstBillingDate: LocalDate?){
+//        this.billingDate = billingDate
+//        this.payAmount = payAmount
+//        this.firstBillingDate = firstBillingDate
+//    }
 
     companion object Builder {
         private val data: PayData = PayData()
@@ -32,6 +32,11 @@ class PayData {
 
         fun builder(): Builder{
             return Builder
+        }
+
+        fun firstBillingDate(firstBillingDate: LocalDate?): Builder {
+            data.firstBillingDate = firstBillingDate
+            return this
         }
     }
 }
