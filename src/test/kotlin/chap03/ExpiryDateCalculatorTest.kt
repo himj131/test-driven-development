@@ -112,6 +112,16 @@ internal class ExpiryDateCalculatorTest {
         )
     }
 
+    @Test
+    internal fun `십만원을 납부하면 1년 제공`() {
+        assertExpiryDate(
+                PayData.builder()
+                        .billingDate(LocalDate.of(2019,1,28))
+                        .payAmount(100000)
+                        .build(), LocalDate.of(2020,1,28)
+        )
+    }
+
     private fun assertExpiryDate(payData: PayData, expectedExpiryDate: LocalDate) {
         var realExpiryDate: LocalDate = calculator.calculateExpiryDate(payData)
         assertEquals(expectedExpiryDate, realExpiryDate)
