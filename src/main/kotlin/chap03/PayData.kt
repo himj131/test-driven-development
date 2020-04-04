@@ -3,7 +3,7 @@ package chap03
 import java.time.LocalDate
 
 class PayData {
-    lateinit var billingDate: LocalDate
+    var billingDate: LocalDate? = null
     var payAmount: Int = 0
     var firstBillingDate: LocalDate? = null
 
@@ -16,7 +16,7 @@ class PayData {
     companion object Builder {
         private val data: PayData = PayData()
 
-        fun buillingDate(billingDate: LocalDate): Builder{
+        fun billingDate(billingDate: LocalDate): Builder{
             data.billingDate = billingDate
             return this
         }
