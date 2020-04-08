@@ -1,7 +1,9 @@
 package chap07
 
-class UserRegister(stubPasswordChecker: StubWeakPasswordChecker) {
+class UserRegister(private val passwordChecker: PasswordChecker) {
     fun register(id: String, pwd: String, email: String) {
-        throw WeakPasswordException()
+        if(passwordChecker.checkPasswordWeak(pwd)) {
+            throw WeakPasswordException()
+        }
     }
 }
