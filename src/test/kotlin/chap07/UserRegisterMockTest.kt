@@ -1,5 +1,6 @@
 package chap07
 
+import com.nhaarman.mockitokotlin2.capture
 import org.junit.jupiter.api.*
 import org.mockito.ArgumentCaptor
 import org.mockito.ArgumentMatchers
@@ -17,13 +18,6 @@ class UserRegisterMockTest {
     private val fakeRepository = MemoryUserRepository()
 //    private val mockEmailNotifier: EmailNotifier = mockk(relaxed = true)
     private val mockEmailNotifier: EmailNotifier = mock(EmailNotifier::class.java)
-
-    @Captor
-    lateinit var classCaptor: ArgumentCaptor<Class<String>>
-
-    @Captor
-    lateinit var booleanCaptor: ArgumentCaptor<Boolean>
-
 
     @BeforeEach
     internal fun setUp() {
@@ -81,15 +75,16 @@ class UserRegisterMockTest {
 
     @Test
     @DisplayName("가입하면 메일을 전송함")
-    @Disabled
     internal fun whenRegisterThenSendMail() {
+        given(mockWeakPasswordChecker.checkPasswordWeak(ArgumentMatchers.anyString())).willReturn(false)
         userRegister.register("id", "pw", "email")
-        var captor: ArgumentCaptor<String> = ArgumentCaptor.forClass(String::class.java)
+        val captor: ArgumentCaptor<String> = ArgumentCaptor.forClass(String::class.java)
 //        then(mockEmailNotifier)
 //                .should()
 //                .sendRegisterEmail(captor.capture())
-
-        verify(mockEmailNotifier).sendRegisterEmail(captor.capture())
+        verify(mockEmailNotifier).sendRegisterEmail(capture(captor))
+// 아래 방법은 안됨
+//        verify(mockEmailNotifier).sendRegisterEmail(captor.capture())
 
         val realEmail: String = captor.value
         assertEquals("email", realEmail)
