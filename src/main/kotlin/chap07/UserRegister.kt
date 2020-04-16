@@ -14,5 +14,5 @@ class UserRegister(private val passwordChecker: PasswordChecker,
         userRepository.save(User(id, pwd, email))
 
         emailNotifier.sendRegisterEmail(email);
-    }
+}
 }
